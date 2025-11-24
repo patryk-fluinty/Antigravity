@@ -57,7 +57,7 @@ const ClientDetails: React.FC<ClientDetailsProps> = ({ client, onClose }) => {
                         <div style={{ marginBottom: '1.5rem' }}>
                             <label style={{ fontSize: '0.75rem', color: 'var(--color-text-dim)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Deal Value</label>
                             <div style={{ marginTop: '0.5rem', fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--color-success)' }}>
-                                ${client.value.toLocaleString()}
+                                {new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(client.value)}
                             </div>
                         </div>
 

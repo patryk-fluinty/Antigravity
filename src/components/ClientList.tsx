@@ -53,7 +53,9 @@ const ClientList: React.FC<ClientListProps> = ({ clients, onEdit, onDelete, onVi
                                     {client.status}
                                 </span>
                             </td>
-                            <td style={{ padding: '1rem' }}>${client.value.toLocaleString()}</td>
+                            <td style={{ padding: '1rem' }}>
+                                {new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(client.value)}
+                            </td>
                             <td style={{ padding: '1rem', color: 'var(--color-text-muted)' }}>{client.lastContact}</td>
                             <td style={{ padding: '1rem' }} onClick={(e) => e.stopPropagation()}>
                                 <div style={{ display: 'flex', gap: '0.5rem' }}>

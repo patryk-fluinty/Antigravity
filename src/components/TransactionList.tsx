@@ -48,8 +48,8 @@ const TransactionList = ({ transactions, onDelete }: TransactionListProps) => {
                                     {t.category}
                                 </span>
                             </td>
-                            <td style={{ padding: '1rem', fontWeight: 600, color: t.type === 'Income' ? 'var(--color-success)' : 'white' }}>
-                                {t.type === 'Income' ? '+' : '-'}${t.amount.toLocaleString()}
+                            <td style={{ padding: '1rem', fontWeight: 600, color: t.type === 'Income' ? 'var(--color-success)' : 'var(--color-danger)' }}>
+                                {t.type === 'Income' ? '+' : '-'}{new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(t.amount)}
                             </td>
                             <td style={{ padding: '1rem' }}>
                                 <button

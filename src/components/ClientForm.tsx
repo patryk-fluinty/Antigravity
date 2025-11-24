@@ -84,7 +84,7 @@ const ClientForm: React.FC<ClientFormProps> = ({ onSave, onClose, initialData })
                             </select>
                         </div>
                         <div>
-                            <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', color: 'var(--color-text-muted)' }}>Deal Value ($)</label>
+                            <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', color: 'var(--color-text-muted)' }}>Deal Value (PLN)</label>
                             <input
                                 type="number" min="0"
                                 value={formData.value}

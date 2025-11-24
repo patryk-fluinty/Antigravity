@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useTransactions } from '../hooks/useTransactions';
 import TransactionList from '../components/TransactionList';
 import TransactionForm from '../components/TransactionForm';
-import { Plus, DollarSign, TrendingUp, TrendingDown } from 'lucide-react';
+import { Plus, TrendingUp } from 'lucide-react';
 
 const Finance = () => {
     const { transactions, addTransaction, deleteTransaction } = useTransactions();
@@ -36,28 +36,22 @@ const Finance = () => {
                         <span style={{ color: 'var(--color-text-muted)' }}>Total Income</span>
                     </div>
                     <p style={{ fontSize: '2rem', fontWeight: 'bold' }}>${totalIncome.toLocaleString()}</p>
-                </div>
-
-                <div className="glass-panel" style={{ padding: '1.5rem' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
-                        <div style={{ padding: '0.75rem', borderRadius: 'var(--radius-md)', background: 'rgba(239, 68, 68, 0.1)', color: 'var(--color-danger)' }}>
-                            <TrendingDown size={24} />
-                        </div>
-                        <span style={{ color: 'var(--color-text-muted)' }}>Total Expenses</span>
+                    <div style={{ color: 'var(--color-text-muted)', marginBottom: '0.5rem' }}>Total Income</div>
+                    <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--color-success)' }}>
+                        {new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(totalIncome)}
                     </div>
-                    <p style={{ fontSize: '2rem', fontWeight: 'bold' }}>${totalExpenses.toLocaleString()}</p>
                 </div>
-
                 <div className="glass-panel" style={{ padding: '1.5rem' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
-                        <div style={{ padding: '0.75rem', borderRadius: 'var(--radius-md)', background: 'rgba(99, 102, 241, 0.1)', color: 'var(--color-primary)' }}>
-                            <DollarSign size={24} />
-                        </div>
-                        <span style={{ color: 'var(--color-text-muted)' }}>Net Profit</span>
+                    <div style={{ color: 'var(--color-text-muted)', marginBottom: '0.5rem' }}>Total Expenses</div>
+                    <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--color-danger)' }}>
+                        {new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(totalExpenses)}
                     </div>
-                    <p style={{ fontSize: '2rem', fontWeight: 'bold', color: netProfit >= 0 ? 'white' : 'var(--color-danger)' }}>
-                        ${netProfit.toLocaleString()}
-                    </p>
+                </div>
+                <div className="glass-panel" style={{ padding: '1.5rem' }}>
+                    <div style={{ color: 'var(--color-text-muted)', marginBottom: '0.5rem' }}>Net Profit</div>
+                    <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: netProfit >= 0 ? 'var(--color-success)' : 'var(--color-danger)' }}>
+                        {new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(netProfit)}
+                    </div>
                 </div>
             </div>
 

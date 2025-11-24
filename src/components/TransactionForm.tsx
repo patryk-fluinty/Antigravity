@@ -74,7 +74,7 @@ const TransactionForm = ({ onSave, onClose }: TransactionFormProps) => {
 
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                         <div>
-                            <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', color: 'var(--color-text-muted)' }}>Amount ($)</label>
+                            <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', color: 'var(--color-text-muted)' }}>Amount (PLN)</label>
                             <input
                                 type="number" min="0" step="0.01" required
                                 value={formData.amount}
