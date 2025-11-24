@@ -3,12 +3,15 @@ import { useClients } from '../hooks/useClients';
 import ClientList from '../components/ClientList';
 import Pipeline from '../components/Pipeline';
 import ClientForm from '../components/ClientForm';
+import ClientDetails from '../components/ClientDetails';
 import { Plus, LayoutList, Kanban } from 'lucide-react';
+import type { Client } from '../types';
 
 const CRM = () => {
     const { clients, addClient, updateClient, deleteClient } = useClients();
     const [view, setView] = useState<'list' | 'pipeline'>('list');
     const [isFormOpen, setIsFormOpen] = useState(false);
+    const [selectedClient, setSelectedClient] = useState<Client | null>(null);
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', height: '100%' }}>
@@ -49,11 +52,13 @@ const CRM = () => {
                         clients={clients}
                         onEdit={() => { }}
                         onDelete={deleteClient}
+                        onView={setSelectedClient}
                     />
                 ) : (
                     <Pipeline
                         clients={clients}
                         onStatusChange={(id, status) => updateClient(id, { status })}
+                        onView={setSelectedClient}
                     />
                 )}
             </div>
@@ -62,6 +67,13 @@ const CRM = () => {
                 <ClientForm
                     onSave={addClient}
                     onClose={() => setIsFormOpen(false)}
+                />
+            )}
+
+            {selectedClient && (
+                <ClientDetails
+                    client={selectedClient}
+                    onClose={() => setSelectedClient(null)}
                 />
             )}
         </div>

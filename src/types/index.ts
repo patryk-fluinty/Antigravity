@@ -20,3 +20,10 @@ export interface Transaction {
     description: string;
     category: string;
 }
+
+export interface ClientLog {
+    id: string;
+    client_id: string;
+    created_at: string;
+    content: string;
+}

@@ -5,9 +5,10 @@ interface ClientListProps {
     clients: Client[];
     onEdit: (client: Client) => void;
     onDelete: (id: string) => void;
+    onView: (client: Client) => void;
 }
 
-const ClientList: React.FC<ClientListProps> = ({ clients, onEdit, onDelete }) => {
+const ClientList: React.FC<ClientListProps> = ({ clients, onEdit, onDelete, onView }) => {
     const getStatusColor = (status: string) => {
         switch (status) {
             case 'Lead': return 'var(--color-text-muted)';
@@ -34,7 +35,7 @@ const ClientList: React.FC<ClientListProps> = ({ clients, onEdit, onDelete }) =>
                 </thead>
                 <tbody>
                     {clients.map((client) => (
-                        <tr key={client.id} style={{ borderBottom: '1px solid var(--color-border)' }}>
+                        <tr key={client.id} style={{ borderBottom: '1px solid var(--color-border)', cursor: 'pointer' }} onClick={() => onView(client)}>
                             <td style={{ padding: '1rem' }}>
                                 <div style={{ fontWeight: 500 }}>{client.name}</div>
                                 <div style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)' }}>{client.email}</div>
@@ -54,7 +55,7 @@ const ClientList: React.FC<ClientListProps> = ({ clients, onEdit, onDelete }) =>
                             </td>
                             <td style={{ padding: '1rem' }}>${client.value.toLocaleString()}</td>
                             <td style={{ padding: '1rem', color: 'var(--color-text-muted)' }}>{client.lastContact}</td>
-                            <td style={{ padding: '1rem' }}>
+                            <td style={{ padding: '1rem' }} onClick={(e) => e.stopPropagation()}>
                                 <div style={{ display: 'flex', gap: '0.5rem' }}>
                                     <button
                                         onClick={() => onEdit(client)}

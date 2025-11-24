@@ -4,11 +4,12 @@ import type { Client, ClientStatus } from '../types';
 interface PipelineProps {
     clients: Client[];
     onStatusChange: (id: string, status: ClientStatus) => void;
+    onView: (client: Client) => void;
 }
 
 const COLUMNS: ClientStatus[] = ['Lead', 'Prospect', 'Negotiation', 'Closed', 'Lost'];
 
-const Pipeline: React.FC<PipelineProps> = ({ clients, onStatusChange }) => {
+const Pipeline: React.FC<PipelineProps> = ({ clients, onStatusChange, onView }) => {
     return (
         <div style={{ display: 'flex', gap: '1rem', overflowX: 'auto', paddingBottom: '1rem' }}>
             {COLUMNS.map((status) => {
@@ -24,7 +25,12 @@ const Pipeline: React.FC<PipelineProps> = ({ clients, onStatusChange }) => {
 
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                             {columnClients.map((client) => (
-                                <div key={client.id} className="glass-panel" style={{ padding: '1rem', cursor: 'grab' }}>
+                                <div
+                                    key={client.id}
+                                    className="glass-panel"
+                                    style={{ padding: '1rem', cursor: 'pointer' }}
+                                    onClick={() => onView(client)}
+                                >
                                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
                                         <span style={{ fontWeight: 500 }}>{client.company}</span>
                                         <span style={{ fontSize: '0.75rem', color: 'var(--color-success)' }}>${client.value.toLocaleString()}</span>
@@ -34,6 +40,7 @@ const Pipeline: React.FC<PipelineProps> = ({ clients, onStatusChange }) => {
 
                                     <select
                                         value={client.status}
+                                        onClick={(e) => e.stopPropagation()}
                                         onChange={(e) => onStatusChange(client.id, e.target.value as ClientStatus)}
                                         style={{
                                             width: '100%',
